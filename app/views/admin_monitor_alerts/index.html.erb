@@ -1,0 +1,71 @@
+<%= stylesheet_link_tag 'admin_monitor_alerts', :plugin => 'redmine_admin_monitor' %>
+<%= javascript_include_tag 'admin_monitor_alerts', :plugin => 'redmine_admin_monitor' %>
+
+<h1><%= "Listing #{l(:admin_monitor_alert)}"%></h1></br>
+<div>
+    <table width="100%">
+        <tr>
+            <td>
+                <%= link_to condition_colored('All',@conditions), admin_monitor_alerts_path %> |
+                <%= link_to condition_colored('Handled',@conditions), admin_monitor_alerts_path(:conditions => 'true') %> | 
+                <%= link_to condition_colored('Not Handled',@conditions), admin_monitor_alerts_path(:conditions => 'false') %>
+            </td>
+            <td style="float:right">
+                <%= legend %>
+            </td>    
+        </tr>
+    </table>
+    <!-- <div>  </div> -->
+</div>
+<div id="table-wrapper">
+  <div id="table-scroll">
+    <table class="list issues">
+        <thead>
+          <tr>
+            <th colspan=5></th>
+            <!-- <th>Id</th> -->
+            <!-- <th>Handled</th> -->
+            <th>Alert Type</th>
+            <th>Source</th>
+            <th>Action</th>
+            <th>Message</th>
+             <th>User</th>
+            <th>Project</th>
+            <th>Issue</th>
+            <th>#Errs</th>
+            <th>Created</th>
+            <th>Updated</th>
+            <th>Backtrace</th>
+        </tr>
+    </thead>
+    <tbody> 
+        <% @admin_monitor_alerts.each_with_index do |alert,index| %>
+        <tr style="background-color: <%= background_color(alert) %>;">
+            <td><%= toggel_silent(alert) %></td>
+            <td><%= link_to image_tag('edit.png', :title => "Edit Alert"), edit_admin_monitor_alert_path(alert) %></td>
+            <td><%= create_issue(alert)%></td>
+            <td><%= link_to image_tag('delete.png', :title => "Delete Alert"), alert, :confirm => 'Are you sure?', :method => :delete %></td>
+            <td><%= toggel_handle(alert)%></td>
+            <!-- <td><%#=h alert.handle_flag %></td> -->
+            <!-- <td><%#=h alert.id %></td> -->
+            <td><%=h alert.alert_type %></td>
+            <td><%=h alert.source %></td>
+            <td><%=h alert.action %></td>
+            <td><%=h alert.message %></td>
+             <td><%=h (alert.user && alert.user.name) ? alert.user.name : "" %></td>
+            <td><%=h (alert.project && alert.project.name) ? alert.project.name : "" %></td>
+            <td class="issue_id_holder"><%= link_issue(alert.issue_id) %></td>
+            <td><%=h alert.counter %></td>
+            <td><%=h time_ago_tag(alert.created_on) %></td>
+            <td><%=h time_ago_tag(alert.updated_on) %></td>
+            <td class='backtrace' title="<%=h pretty_array_string(alert.backtrace) %>" ><%=h small_backtrace(alert.backtrace) %></td>
+        </tr>
+        <% end %>
+    </tbody> 
+</table>
+</div>
+</div>
+<p class="pagination"><%= pagination_links_full @pages %></p>
+<br />
+
+<%= link_to 'Create New', new_admin_monitor_alert_path %>

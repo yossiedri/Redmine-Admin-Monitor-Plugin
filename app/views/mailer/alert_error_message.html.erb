@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<h1>New Redmine Alert</h1>
+</br></br>
+<b>Alert Message: <%=@message %> </b>
+<hr />
+</br></br>
+<strong> Details: </strong>
+</br>
+<p>Id: <%= @id %> </p>
+<p>Alert Type: <%= @alert_type %></p>
+<p>User: <%= @user %></p>
+<p>Project: <%= @project %></p>
+<p>Source: <%= @source %></p>
+<p>Action: <%= @action %></p>
+<p>Created at: <%= format_time @created_on %></p>
+<hr />
+<%= link_to 'More Details', @url %>
+<hr />
+<strong> Params: </strong>
+<p class='wiki-edit'><%= @params.join("\n").html_safe unless @params.blank? %></p>
+<strong> Backtrace: </strong>
+<p class='wiki-edit'><%= @backtrace.join("\n").html_safe unless @backtrace.blank? %></p>

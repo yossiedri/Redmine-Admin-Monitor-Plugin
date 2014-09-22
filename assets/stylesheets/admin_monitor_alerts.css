@@ -1,0 +1,19 @@
+#table-wrapper {
+	position:relative;
+}
+#table-scroll {
+	/*height:150px;*/
+	overflow:auto;  
+	/*margin-top:20px;*/
+}
+#table-wrapper table {
+	width:100%;
+
+}
+
+.backtrace label {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	white-space:nowrap;
+}

@@ -1,0 +1,13 @@
+# English strings go here for Rails i18n
+en:
+  admin_monitor: "Alerts Monitor"
+  admin_monitor_alert: "Alert Message"
+  notice_internal_error: "An error occurred on the page you were trying to access, a message has been sent to Redmine administrator. If you continue to experience problems please contact your Redmine administrator for assistance."
+  field_alert_type: Alert Type
+  field_source: Source
+  field_action: Action
+  field_message: Message
+  field_backtrace: Backtrace
+  field_params: Params
+  field_handle_flag: Alert Handled
+  field_silent_flag: Silent Alert

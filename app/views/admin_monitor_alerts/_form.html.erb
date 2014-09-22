@@ -1,0 +1,113 @@
+<%= form_for(@admin_monitor_alert) do |f| %>
+<%= error_messages_for 'admin_monitor_alert' %>
+<div class="field">
+  <p>
+    <%= f.label :user_id %><br>
+    <%= f.select :user_id, User.all.collect{|x| [x.name, x.id]} , {}, :disabled => false ,:class=>"select2able"%>
+  </p>
+</div>
+<div class="field">
+  <p>
+    <%= f.label :project_id %><br>
+    <%= f.select :project_id, Project.active.collect{|p| [p.name, p.id]} , {}, :disabled => false ,:class=>"select2able"%>
+  </p>
+</div>
+<div class="field">
+  <p>
+    <%= f.label :issue_id %><br>
+    <%= f.text_field :issue_id %>
+  </p>
+</div>
+<div class="field">
+  <p>
+    <%= f.label :alert_type %><br>
+    <%= f.text_field :alert_type %>
+  </p>
+</div>
+
+<div class="field">
+  <p>
+    <%= f.label :source %><br>
+    <%= f.text_field :source %>
+  </p>
+</div>
+
+<div class="field">
+  <p>
+    <%= f.label :action %><br>
+    <%= f.text_field :action %>
+  </p>
+</div>
+
+<div class="field">
+  <p>
+    <%= f.label :message %><br>
+    <%= text_area_tag "admin_monitor_alert[message]",@admin_monitor_alert.message,
+                   :rows => (@admin_monitor_alert.message.blank? ? 1 : [[1, @admin_monitor_alert.message.length/200].max, 4].min),
+                   :class => 'wiki-edit',
+                   :no_label => true %>
+  </p>
+</div>
+
+<div class="field">
+  <p>
+    <%= f.label :params %><br>
+    <%= text_area_tag "admin_monitor_alert[params]",pretty_array_string(@admin_monitor_alert.params),
+                   :cols => 60,
+                   :rows => (@admin_monitor_alert.params.blank? ? 1 : [[1, @admin_monitor_alert.params.size].max, 50].min),
+                   :class => 'wiki-edit',
+                   :no_label => true %>
+  </p>
+</div>
+
+
+<div class="field">
+  <p>
+    <%= f.label :handle_flag %><br>
+    <%= f.select :handle_flag, ['true','false']%>
+  </p>
+</div>
+<div class="field">
+  <p>
+    <%= f.label :silent_flag %><br>
+    <%= f.select :silent_flag, ['true','false']%>
+  </p>
+</div>
+<div class="field">
+  <p>
+    <%= f.label :created_on %><br />
+    <%= f.text_field :created_on %>
+  </p>
+</div>
+<div class="field">
+  <p>
+    <%= f.label :updated_on %><br />
+    <%= f.text_field :updated_on %>
+  </p>
+</div>
+
+<div class="field">
+  <p>
+    <%= f.label :backtrace %><br>
+    <%= text_area_tag "admin_monitor_alert[backtrace]",pretty_array_string(@admin_monitor_alert.backtrace),
+                   :cols => 60,
+                   :rows => (@admin_monitor_alert.backtrace.blank? ? 10 : [[10, @admin_monitor_alert.backtrace.size].max, 50].min),
+                   :class => 'wiki-edit',
+                   :no_label => true %>
+  </p>
+</div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>
+
+<% end %>
+
+</br>
+<p>
+  <%= link_to 'List All', admin_monitor_alerts_path %>
+</p>
+<%= javascript_include_tag "admin_monitor_alerts.js" ,:plugin => 'redmine_admin_monitor'%>
+
+
+

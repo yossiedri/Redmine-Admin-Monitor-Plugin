@@ -1,0 +1,21 @@
+<%="New Redmine Alert" %>
+
+<%="Alert Message:: #{@message}"%> 
+----------------------------------------
+
+<%="Details:"%>
+
+<%="Id: #{@id}" %>
+<%="Alert Type: #{@alert_type}" %>
+<%="User: #{@user}" %>
+<%="Project: #{@project}" %>
+<%="Source: #{@source}" %>
+<%="Action: #{@action}" %>
+<%="Created On: #{format_time @created_on}" %>
+----------------------------------------
+<%= link_to 'More Details', @url %>
+----------------------------------------
+<%="Params:"%>
+<%= @params.join("\n").html_safe unless @params.blank? %>  
+<%="Backtrace:"%>
+<%= @backtrace.join("\n").html_safe unless @backtrace.blank? %>  
