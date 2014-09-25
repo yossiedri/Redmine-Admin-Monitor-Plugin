@@ -1,10 +1,9 @@
 Redmine::Plugin.register :redmine_admin_monitor do
-  name 'Redmine Admine Errors and Exceptions Monitor plugin'
+  name 'Redmine Admin Errors and Exceptions Monitor plugin'
   author 'Yoss!E <4yossiedri@gmail.com>'
-  description 'This is a plugin for Redmine'
+  description 'This Plugin provides an automatic error monitoring and reporting.'
   version '0.0.1'
-  url 'http://example.com/path/to/plugin'
-  author_url 'http://example.com/about'
+  url 'https://github.com/yossiedri/Redmine-Admin-Monitor-Plugin'
 
   menu :top_menu, :admin_monitor, { :controller => '/admin_monitor_alerts', 
     :action => 'index',:conditions => 'false' },
