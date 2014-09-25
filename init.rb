@@ -6,11 +6,9 @@ Redmine::Plugin.register :redmine_admin_monitor do
   url 'http://example.com/path/to/plugin'
   author_url 'http://example.com/about'
 
-  menu :top_menu, :admin_monitor, { :controller => '/admin_monitor_alerts', 
-    :action => 'index',:conditions => 'false' },
+  menu :top_menu, :admin_monitor, { :controller => :admin_monitor_alerts, :action => 'index',:conditions => 'false' },
     :caption => :admin_monitor ,
     :if => Proc.new { User.current.admin? }
-
   end
 
   Rails.application.config.to_prepare do
