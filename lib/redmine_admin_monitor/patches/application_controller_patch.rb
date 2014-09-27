@@ -5,7 +5,7 @@ module RedmineAdminMonitor
         base.extend(ClassMethods)
         base.send(:include, InstanceMethods)
         base.class_eval do   
-          rescue_from Exception, with: :render_500 
+          rescue_from Exception, :with => :render_500 
         end
       end 
     end
