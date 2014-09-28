@@ -3,6 +3,8 @@ Redmine-Admin-Monitor-Plugin
 
 Redmine Admine Errors and Exceptions Monitor plugin
 
+This plugin will monitor all Redmine's internal errors and display it for your review.
+Additional the following features are supported:
 
 This pluging will monitor all Redmine's internal errors and display it for your review.
 it will also do:
