@@ -11,6 +11,6 @@ it will also do:
 3) display a user frandly message on error
 4) enable silent mode for cpecific error
 5) send a mail notifications on error
-6) basic crud operations
+6) basic CRUD operations
 
-works on redmine 2.3
+Tested for Redmine >~ 2.3 (Not tested on older Redmine versions)
