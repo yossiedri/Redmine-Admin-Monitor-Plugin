@@ -26,7 +26,7 @@ module RedmineAdminMonitor
         @params =  alert.params
         @backtrace =  alert.backtrace
         
-        @url = url_for(:controller => 'admin_monitor_alerts', :action => 'edit', :id => @id ,:host => HOST, :port => PORT)
+        @url = url_for(:controller => 'admin_monitor_alerts', :action => 'edit', :id => @id ) #,:host => HOST, :port => PORT)
         
         mail :to => recipients, :cc => cc, :subject => subject
       end

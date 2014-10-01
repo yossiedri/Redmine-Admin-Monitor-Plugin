@@ -92,9 +92,9 @@ module AdminMonitorAlertsHelper
 	
 	def toggel_silent(alert)
 		if alert.silent_flag
-			return link_to image_tag('silent.png', :title => "Click to enable mail alert for this error") , {:remote => true , :controller => :admin_monitor_alerts , :action => :silent , :id => alert.id , :silent_flag => false } , {:id => "admin_monitor_alerts_silent_flag_#{alert.id}"  ,:class => "admin_monitor_alerts_silent_flag"}							
+			return link_to image_tag('../plugin_assets/redmine_admin_monitor/images/silent.png', :title => "Click to enable mail alert for this error") , {:remote => true , :controller => :admin_monitor_alerts , :action => :silent , :id => alert.id , :silent_flag => false } , {:id => "admin_monitor_alerts_silent_flag_#{alert.id}"  ,:class => "admin_monitor_alerts_silent_flag"}							
 		else	
-			return link_to image_tag('unsilent.png', :title => "Click to disable mail alert for this error") , {:remote => true , :controller => :admin_monitor_alerts , :action => :silent , :id => alert.id , :silent_flag => true } , {:id => "admin_monitor_alerts_silent_flag_#{alert.id}"  ,:class => "admin_monitor_alerts_silent_flag"}	
+			return link_to image_tag('../plugin_assets/redmine_admin_monitor/images/unsilent.png', :title => "Click to disable mail alert for this error") , {:remote => true , :controller => :admin_monitor_alerts , :action => :silent , :id => alert.id , :silent_flag => true } , {:id => "admin_monitor_alerts_silent_flag_#{alert.id}"  ,:class => "admin_monitor_alerts_silent_flag"}	
 		end	
 	end	
 

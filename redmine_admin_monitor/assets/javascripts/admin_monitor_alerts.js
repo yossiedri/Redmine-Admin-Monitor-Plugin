@@ -6,7 +6,7 @@ $(function() {
   $('.admin_monitor_alerts_to_issue').bind('ajax:success',function(event, data, status, xhr){
     if(status == 'success'){
       imag_obj = $("#admin_monitor_alerts_to_issue_" + data["response"][0] + " img")
-      imag_obj.attr("src", '/images/duplicate.png');
+      imag_obj.attr("src", '../plugin_assets/redmine_admin_monitor/images/duplicate.png');
       imag_obj.attr("title", 'Go to Issue!');
 
       a_link = imag_obj.parent();
@@ -28,7 +28,7 @@ $(function() {
     if(status == 'success'){
       imag_obj = $("#admin_monitor_alerts_handle_flag_" + data["response"][0] + " img")
       image = (data["response"][1]) ? "false" : "true"
-      imag_obj.attr("src", '/images/' + image + '.png');
+      imag_obj.attr("src", '../plugin_assets/redmine_admin_monitor/images/' + image + '.png');
       title = (data["response"][1]) ? "UnHandle!" : "Handle!"
       imag_obj.attr("title", title );
 
@@ -44,7 +44,7 @@ $(function() {
     if(status == 'success'){
       imag_obj = $("#admin_monitor_alerts_silent_flag_" + data["response"][0] + " img")
       image = (data["response"][1]) ? "silent" : "unsilent";
-      imag_obj.attr("src", '/images/' + image + '.png');
+      imag_obj.attr("src", '../plugin_assets/redmine_admin_monitor/images/' + image + '.png');
       title = (data["response"][1]) ? "Click to disable mail alert for this error" : "Click to enable mail alert for this error" ;
       imag_obj.attr("title", title );
 
