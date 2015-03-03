@@ -2,7 +2,7 @@ Redmine::Plugin.register :redmine_admin_monitor do
   name 'Redmine Admin Errors and Exceptions Monitor plugin'
   author 'Yoss!E <4yossiedri@gmail.com>'
   description 'This Plugin provides an automatic error monitoring and reporting.'
-  version '0.0.1'
+  version '1.0.0'
   url 'https://github.com/yossiedri/Redmine-Admin-Monitor-Plugin'
 
   menu :top_menu, :admin_monitor, { :controller => :admin_monitor_alerts, :action => 'index',:conditions => 'false' },

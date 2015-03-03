@@ -13,7 +13,7 @@ class AdminMonitorAlertsController < ApplicationController
       raise "Issue already exist!!" if @admin_monitor_alert.issue_id
 
       @issue = Issue.create!({:author_id => User.current.id,
-       :project_id => 100,
+       :project_id => 1,
        :assigned_to_id => User.current.id,
        :subject=> "#{@admin_monitor_alert.alert_type} in #{@admin_monitor_alert.source} on #{@admin_monitor_alert.action}",
        :tracker_id => 1,
@@ -47,21 +47,29 @@ class AdminMonitorAlertsController < ApplicationController
   end
 
   def silent
-      
-      if @admin_monitor_alert.update_attributes({:silent_flag => params[:silent_flag]})
-        render :json => {:response => [@admin_monitor_alert.id,@admin_monitor_alert.silent_flag]}
-      else
-        render json: @admin_monitor_alert.errors, status: :unprocessable_entity
-      end
-      
+
+    if @admin_monitor_alert.update_attributes({:silent_flag => params[:silent_flag]})
+      render :json => {:response => [@admin_monitor_alert.id,@admin_monitor_alert.silent_flag]}
+    else
+      render json: @admin_monitor_alert.errors, status: :unprocessable_entity
+    end
+
   end
 
   def index
     @conditions = params[:conditions] || ""
-    @pages, @admin_monitor_alerts = paginate :admin_monitor_alert,
-    :per_page => 15 ,
-    :conditions => @conditions.blank? ? '' : "#{AdminMonitorAlert.table_name}.handle_flag = #{@conditions}" , 
-    :order => "#{AdminMonitorAlert.table_name}.created_on DESC"
+    # @pages, @admin_monitor_alerts = paginate :admin_monitor_alert,
+    # :per_page =>  ,
+    # :conditions => @conditions.blank? ? '' : "#{AdminMonitorAlert.table_name}.handle_flag = #{@conditions}" , 
+    # :order => "#{AdminMonitorAlert.table_name}.created_on DESC"
+
+    @conditions = params[:conditions].blank? ? '' : "handle_flag = #{@conditions}" 
+    @limit = 15
+    @alerts_count = AdminMonitorAlert.alerts.count
+    @pages = Paginator.new @alerts_count, @limit, params['page']
+    @offset ||= @pages.offset
+    @admin_monitor_alerts = AdminMonitorAlert.where(@conditions).order("created_on DESC").limit(@limit).offset(@offset)
+
   end
 
   def new
@@ -113,7 +121,9 @@ class AdminMonitorAlertsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def admin_monitor_alert_params
-      admin_monitor_alert = params[:admin_monitor_alert]
+      
+      admin_monitor_alert = params.require(:admin_monitor_alert).permit(:id, :handle_flag,:backtrace,:user_id,:project_id,:issue_id,:alert_type,:source,:action,:message,:silent_flag) 
+      
       raise "Params missing error" if admin_monitor_alert.blank?
       
       if params[:action].eql?('update') && !admin_monitor_alert[:backtrace].blank?

@@ -9,7 +9,10 @@ class AdminMonitorAlert < ActiveRecord::Base
 	serialize :params, Array
 	after_create :send_error_mail
 	# after_update :send_error_mail 
-	scope :alert_types , select("alert_type").group("alert_type")
+	scope :alert_types , -> { select(:alert_type).group(:alert_type).pluck(:alert_type) }
+	scope :alerts , -> { select("*") }
+
+	attr_accessible :handle_flag,:backtrace,:user_id,:project_id,:issue_id,:alert_type,:source,:action,:message,:silent_flag
 
 	def send_error_mail
 		Mailer.deliver_alert_error_message(self) unless self.silent?
