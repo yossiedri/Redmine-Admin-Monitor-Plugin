@@ -1,0 +1,17 @@
+<fieldset>
+  <legend><%= l(:label_tracker_plural) %></legend>
+  
+  <%- projects = Project.all.collect{|t| [t.name, t.id]} -%>
+  <p>
+    <label><%= l(:label_project_plural) %>:</label>
+    <%- options = options_for_select(projects, RedmineAdminMonitor::Setting.default_project_id) -%>
+    <%= select_tag "settings[default_project_id]", options, :multiple => false %>
+  </p>
+
+  <%- trackers = Tracker.all.collect{|t| [t.name, t.id]} -%>
+  <p>
+    <label><%= l(:label_tracker_plural) %>:</label>
+    <%- options = options_for_select(trackers, RedmineAdminMonitor::Setting.default_tracker_id) -%>
+    <%= select_tag "settings[default_tracker_id]", options, :multiple => false %>
+  </p>
+</fieldset>
