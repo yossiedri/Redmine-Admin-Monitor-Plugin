@@ -6,11 +6,16 @@ Redmine::Plugin.register :redmine_admin_monitor do
   url 'https://github.com/yossiedri/Redmine-Admin-Monitor-Plugin'
 
   menu :top_menu, :admin_monitor, { :controller => :admin_monitor_alerts, :action => 'index',:conditions => 'false' },
-    :caption => :admin_monitor ,
-    :if => Proc.new { User.current.admin? }
-  end
+  :caption => :admin_monitor ,
+  :if => Proc.new { User.current.admin? }
 
-  Rails.application.config.to_prepare do
+  settings  :default => {:default_project_id => "1",:default_tracker_id => "1"} , :partial => "settings/admin_monitor_settings"  
+end
+
+
+
+
+Rails.application.config.to_prepare do
 
   unless ApplicationController.included_modules.include?(RedmineAdminMonitor::Patches::ApplicationControllerPatch)
     ApplicationController.send(:include,RedmineAdminMonitor::Patches::ApplicationControllerPatch)
@@ -20,4 +25,4 @@ Redmine::Plugin.register :redmine_admin_monitor do
     Mailer.send(:include,RedmineAdminMonitor::Patches::MailerPatch)
   end
 
- end
+end
